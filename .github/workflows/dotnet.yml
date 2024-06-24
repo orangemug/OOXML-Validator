@@ -33,6 +33,8 @@ jobs:
         run: dotnet restore
       - name: Build/linux-x64
         run: dotnet publish --framework net8.0 -c Release -r linux-x64 -p:IncludeNativeLibrariesForSelfExtract=true -p:InvariantGlobalization=true OOXMLValidator.sln
+      - name: Build/linux-arm64
+        run: dotnet publish --framework net8.0 -c Release -r linux-arm64 -p:IncludeNativeLibrariesForSelfExtract=true -p:InvariantGlobalization=true OOXMLValidator.sln
       - name: Build/osx-x64
         run: dotnet publish --framework net8.0 -c Release -r osx-x64 OOXMLValidator.sln
       - name: Build/win-x64
@@ -42,6 +44,11 @@ jobs:
         with:
           name: build-linux-x64
           path: ./OOXMLValidatorCLI/bin/Release/net8.0/linux-x64/publish/OOXMLValidatorCLI
+      - name: Artifacts/linux-arm64
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-linux-arm64
+          path: ./OOXMLValidatorCLI/bin/Release/net8.0/linux-arm64/publish/OOXMLValidatorCLI
       - name: Artifacts/osx-x64
         uses: actions/upload-artifact@v4
         with:
