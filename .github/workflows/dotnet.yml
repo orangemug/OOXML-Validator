@@ -43,5 +43,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
-          path: ./OOXMLValidatorCLI/bin/Release/OOXMLValidatorCLI/bin/Release//net8.0/linux-x64/publish/OOXMLValidatorCLI
+          path: ./OOXMLValidatorCLI/bin/Release/net8.0/linux-x64/publish/OOXMLValidatorCLI
         
