@@ -38,10 +38,10 @@ jobs:
         run: dotnet publish --framework net8.0 -c Release -r linux-x64 OOXMLValidator.sln
       - name: Test
         run: dotnet test ./OOXMLValidatorCLITests/OOXMLValidatorCLITests.csproj --no-restore --verbosity normal
-      - run: find OOXMLValidatorCLI/bin/Release/
-      # - name: Archive code coverage results
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: code-coverage-report
-      #     path: output/test/code-coverage.html
+      # - run: find ./OOXMLValidatorCLI/bin/Release/OOXMLValidatorCLI/bin/Release//net8.0/linux-x64/publish/OOXMLValidatorCLI
+      - name: Build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: ./OOXMLValidatorCLI/bin/Release/OOXMLValidatorCLI/bin/Release//net8.0/linux-x64/publish/OOXMLValidatorCLI
         
