@@ -2,7 +2,7 @@ name: OOXMLValidator Tests
 
 on:
   push:
-    branches: [main]
+    branches: [main, fix/cli-build]
     paths-ignore:
       - '**.md'
   pull_request:
@@ -35,7 +35,13 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet publish --configuration Release --no-restore
+      - run: ls -l
       - name: Test
         run: dotnet test ./OOXMLValidatorCLITests/OOXMLValidatorCLITests.csproj --no-restore --verbosity normal
+      # - name: Archive code coverage results
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: code-coverage-report
+      #     path: output/test/code-coverage.html
         
