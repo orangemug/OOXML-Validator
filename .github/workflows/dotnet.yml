@@ -32,18 +32,28 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Build/linux-x64
-        run: dotnet publish --framework net8.0 -c Release -r linux-x64 OOXMLValidator.sln
-      - name: Build/oxs-x64
+        run: |
+          dotnet publish --framework net8.0 -c Release -r linux-x64 OOXMLValidator.sln
+          mkdir linux-x64
+          cp ./OOXMLValidatorCLI/bin/Release/net8.0/linux-x64/publish/OOXMLValidatorCLI
+      - name: Build/osx-x64
         run: dotnet publish --framework net8.0 -c Release -r osx-x64 OOXMLValidator.sln
       - name: Build/win-x64
         run: dotnet publish --framework net8.0 -c Release -r win-x64 OOXMLValidator.sln
       # - run: find ./OOXMLValidatorCLI/bin/Release/OOXMLValidatorCLI/bin/Release//net8.0/linux-x64/publish/OOXMLValidatorCLI
-      - name: Build artifacts
+      - name: Artifacts/linux-x64
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifacts
-          path: |
-            ./OOXMLValidatorCLI/bin/Release/net8.0/linux-x64/publish/OOXMLValidatorCLI
-            ./OOXMLValidatorCLI/bin/Release/net8.0/oxs-x64/publish/OOXMLValidatorCLI
-            ./OOXMLValidatorCLI/bin/Release/net8.0/win-x64/publish/OOXMLValidatorCLI
+          name: build-linux-x64
+          path: ./OOXMLValidatorCLI/bin/Release/net8.0/linux-x64/publish/OOXMLValidatorCLI
+      - name: Artifacts/osx-x64
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-osx-x64
+          path: ./OOXMLValidatorCLI/bin/Release/net8.0/osx-x64/publish/OOXMLValidatorCLI
+      - name: Artifacts/win-x64
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-win-x64
+          path: ./OOXMLValidatorCLI/bin/Release/net8.0/win-x64/publish/OOXMLValidatorCLI
         
