@@ -15,20 +15,14 @@ env:
 
 jobs:
   test:
-    strategy:
-      matrix:
-        os: 
-          - ubuntu-latest
-        dotnet-version:
-          - 8.x
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-      - name: Setup DotNet ${{ matrix.dotnet-version }} Environment
+      - name: Setup DotNet 8.x Environment
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: 8.x
       - name: Install dependencies
         run: dotnet restore
 
@@ -40,7 +34,7 @@ jobs:
         run: dotnet publish --framework net8.0 -c Release -r osx-x64 OOXMLValidator.sln
       - name: Build/win-x64
         run: dotnet publish --framework net8.0 -c Release -r win-x64 OOXMLValidator.sln
-        
+
       - name: Artifacts/linux-x64
         uses: actions/upload-artifact@v4
         with:
