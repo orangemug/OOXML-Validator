@@ -31,14 +31,12 @@ jobs:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
         run: dotnet restore
-      - name: Build/win-x64
-        run: dotnet publish --framework net8.0 -c Release -r win-x64 OOXMLValidator.sln
-      - run: find OOXMLValidatorCLI/bin/Release/net8.0/win-x64
       - name: Build/linux-x64
-        run: dotnet publish --framework net8.0 -c Release -r linux-x64 OOXMLValidator.sln
+        run: dotnet publish --framework net8.0 -c Release -r linux-x64 -p:PublishSingleFile=true OOXMLValidator.sln
       - name: Build/osx-x64
         run: dotnet publish --framework net8.0 -c Release -r osx-x64 OOXMLValidator.sln
-      # - run: find ./OOXMLValidatorCLI/bin/Release/OOXMLValidatorCLI/bin/Release//net8.0/linux-x64/publish/OOXMLValidatorCLI
+      - name: Build/win-x64
+        run: dotnet publish --framework net8.0 -c Release -r win-x64 OOXMLValidator.sln
       - name: Artifacts/linux-x64
         uses: actions/upload-artifact@v4
         with:
@@ -53,5 +51,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-win-x64
-          path: ./OOXMLValidatorCLI/bin/Release/net8.0/win-x64/publish/OOXMLValidatorCLI
+          path: ./OOXMLValidatorCLI/bin/Release/net8.0/win-x64/publish/OOXMLValidatorCLI.exe
         
