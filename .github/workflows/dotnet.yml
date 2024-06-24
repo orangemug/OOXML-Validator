@@ -34,7 +34,7 @@ jobs:
       - name: Build/linux-x64
         run: dotnet publish --framework net8.0 -c Release -r linux-x64 OOXMLValidator.sln
       - name: Build/oxs-x64
-        run: dotnet publish --framework net8.0 -c Release -r oxs-x64 OOXMLValidator.sln
+        run: dotnet publish --framework net8.0 -c Release -r osx-x64 OOXMLValidator.sln
       - name: Build/win-x64
         run: dotnet publish --framework net8.0 -c Release -r win-x64 OOXMLValidator.sln
       # - run: find ./OOXMLValidatorCLI/bin/Release/OOXMLValidatorCLI/bin/Release//net8.0/linux-x64/publish/OOXMLValidatorCLI
