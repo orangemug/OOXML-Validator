@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet publish -c Release -r linux-x64 --output ./build OOXMLValidator.sln
+        run: dotnet publish --framework net8.0 -c Release -r linux-x64 --output ./build OOXMLValidator.sln
       - run: ls -l build
       - name: Test
         run: dotnet test ./OOXMLValidatorCLITests/OOXMLValidatorCLITests.csproj --no-restore --verbosity normal
