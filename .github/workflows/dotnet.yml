@@ -2,7 +2,7 @@ name: OOXMLValidator Tests
 
 on:
   push:
-    branches: [main, fix/cli-build]
+    branches: [main]
     paths-ignore:
       - '**.md'
   pull_request:
@@ -18,8 +18,11 @@ jobs:
     strategy:
       matrix:
         os: 
+          - macos-latest
           - ubuntu-latest
+          - windows-latest
         dotnet-version:
+          - 6.x
           - 8.x
     runs-on: ${{ matrix.os }}
 
@@ -31,32 +34,8 @@ jobs:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
         run: dotnet restore
-      - name: Build/linux-x64
-        run: dotnet publish --framework net8.0 -c Release -r linux-x64 -p:IncludeNativeLibrariesForSelfExtract=true -p:InvariantGlobalization=true OOXMLValidator.sln
-      - name: Build/linux-arm64
-        run: dotnet publish --framework net8.0 -c Release -r linux-arm64 -p:IncludeNativeLibrariesForSelfExtract=true -p:InvariantGlobalization=true OOXMLValidator.sln
-      - name: Build/osx-x64
-        run: dotnet publish --framework net8.0 -c Release -r osx-x64 OOXMLValidator.sln
-      - name: Build/win-x64
-        run: dotnet publish --framework net8.0 -c Release -r win-x64 OOXMLValidator.sln
-      - name: Artifacts/linux-x64
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-linux-x64
-          path: ./OOXMLValidatorCLI/bin/Release/net8.0/linux-x64/publish/OOXMLValidatorCLI
-      - name: Artifacts/linux-arm64
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-linux-arm64
-          path: ./OOXMLValidatorCLI/bin/Release/net8.0/linux-arm64/publish/OOXMLValidatorCLI
-      - name: Artifacts/osx-x64
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-osx-x64
-          path: ./OOXMLValidatorCLI/bin/Release/net8.0/osx-x64/publish/OOXMLValidatorCLI
-      - name: Artifacts/win-x64
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-win-x64
-          path: ./OOXMLValidatorCLI/bin/Release/net8.0/win-x64/publish/OOXMLValidatorCLI.exe
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Test
+        run: dotnet test ./OOXMLValidatorCLITests/OOXMLValidatorCLITests.csproj --no-restore --verbosity normal
         
