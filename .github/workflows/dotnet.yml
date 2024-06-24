@@ -35,7 +35,6 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet publish --configuration Release --no-restore
         run: dotnet publish -c Release -r linux-x64 --output ./build OOXMLValidator.sln
       - run: ls -l build
       - name: Test
