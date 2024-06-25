@@ -29,3 +29,31 @@ XML and JSON both return a list of validation errors. In addition to the validat
 ## Validating Directories
 
 If the first argument passed is a directory path, then all Office Open XML files in the directory are validated. Non-OOXML files are ignored. If the `-r` or `--recursive` flags are passed then all directories are validated recursively.
+
+
+## Development
+You can run some development scripts with
+
+```bash
+./dev.sh help
+# ./dev.sh <command> [build_env]
+# 
+#   help                 show this help message
+#   docker               docker container for development
+#   build <build_env>    build
+#   envs                 show build envs
+#   run <build_env>      run the command line
+# 
+```
+
+To build where you replace `linux-x64` with your environment
+
+```bash
+/dev.sh build linux-x64
+```
+
+Run run it with
+
+```bash
+/dev.sh run linux-x64
+```
