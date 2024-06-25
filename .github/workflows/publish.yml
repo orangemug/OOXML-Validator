@@ -47,9 +47,10 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4.0.0
+      - uses: actions/download-artifact@v4
         with:
           name: build-osx-x64
+          path: ./OOXMLValidatorCLI
       - run: CI_HACK=1 ./dev.sh test osx-x64
 
   publish-test-linux:
@@ -57,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4.0.0
+      - uses: actions/download-artifact@v4
         with:
           name: build-linux-x64
       - run: CI_HACK=1 ./dev.sh test linux-x64
@@ -67,7 +68,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4.0.0
+      - uses: actions/download-artifact@v4
         with:
           name: build-win-x64
       - run: CI_HACK=1 ./dev.sh test win-x64

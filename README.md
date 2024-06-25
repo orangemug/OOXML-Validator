@@ -49,17 +49,18 @@ You can run some development scripts with
 To build where you replace `linux-x64` with your environment
 
 ```bash
-/dev.sh build linux-x64
+./dev.sh build linux-x64
 ```
 
 Run the executable with
 
 ```bash
-/dev.sh run linux-x64 ./test.docx
+./dev.sh run linux-x64 ./test.docx
 ```
 
 If you don't want to install `dotnet` just run the following to start a container shell
 
-```
-/dev.sh docker
+```bash
+./dev.sh docker
+# root@8b0f1aad055c:/code# RUN YOU COMMAND HERE....
 ```
