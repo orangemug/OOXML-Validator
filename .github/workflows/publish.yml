@@ -42,18 +42,29 @@ jobs:
           name: build-${{ matrix.build_env }}
           path: ./OOXMLValidatorCLI/bin/Release/net8.0/${{ matrix.build_env }}/publish/OOXMLValidatorCLI
         
-  publish-test-macos:
+  publish-test-osx-x64:
     needs: publish
     runs-on: macos-latest
     steps:
-      - run: ./dev.sh test osx-x64
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-osx-x64
+      - run: CI_HACK=1 ./dev.sh test osx-x64
+
   publish-test-linux:
     needs: publish
     runs-on: ubuntu-latest
     steps:
-      - run: ./dev.sh test linux-x64
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-linux-x64
+      - run: CI_HACK=1 ./dev.sh test linux-x64
+
   publish-test-windows:
     needs: publish
     runs-on: windows-latest
     steps:
-      - run: ./dev.sh test win-x64
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-win-x64
+      - run: CI_HACK=1 ./dev.sh test win-x64
