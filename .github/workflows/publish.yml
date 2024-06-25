@@ -4,7 +4,6 @@ on:
   push:
     branches: 
       - feature/added-publish-action-v3
-on:
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
@@ -44,7 +43,7 @@ jobs:
           name: build-${{ matrix.build_env }}
           path: ./OOXMLValidatorCLI/bin/Release/net8.0/${{ matrix.build_env }}/publish/OOXMLValidatorCLI
         
-  publish/test/windows:
+  publish/test/macos:
     runs-on: macos-latest
     steps:
       - run: ./dev.sh test osx-x64
