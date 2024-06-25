@@ -46,6 +46,10 @@ build () {
         exit 1
     fi
 
+    if [[ "win-" =~ $build_env ]]; then
+        ext=".exe"
+    fi
+
     case "$build_env" in
         "linux-x64")
             dotnet publish --framework net8.0 -c Release -r linux-x64 -p:IncludeNativeLibrariesForSelfExtract=true -p:InvariantGlobalization=true OOXMLValidator.sln
@@ -64,7 +68,9 @@ build () {
             ;;
     esac
 
-    chmod +x "./OOXMLValidatorCLI/bin/Release/net8.0/${build_env}/publish/OOXMLValidatorCLI"
+    if ! [[ "win-" =~ $build_env ]]; then
+        chmod +x "./OOXMLValidatorCLI/bin/Release/net8.0/${build_env}/publish/OOXMLValidatorCLI"
+    fi
 }
 
 run () {
@@ -80,7 +86,7 @@ run () {
         exit 1
     fi
 
-    if ! [[ "win-" =~ $build_env ]]; then
+    if [[ "win-" =~ $build_env ]]; then
         ext=".exe"
     fi
 
@@ -101,7 +107,7 @@ test () {
         exit 1
     fi
 
-    if ! [[ "win-" =~ $build_env ]]; then
+    if [[ "win-" =~ $build_env ]]; then
         ext=".exe"
     fi
 
