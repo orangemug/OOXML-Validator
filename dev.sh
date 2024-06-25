@@ -109,7 +109,7 @@ test () {
 
     shell_cmd="./OOXMLValidatorCLI/bin/Release/net8.0/${build_env}/publish/OOXMLValidatorCLI${ext}"
     if [ "$CI_HACK" -eq 1 ]; then
-        shell_cmd="./OOXMLValidatorCLI${ext}"
+        shell_cmd="./test-ci${ext}"
     fi
     echo $shell_cmd
     output="$($shell_cmd)" 
