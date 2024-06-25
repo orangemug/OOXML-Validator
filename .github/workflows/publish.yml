@@ -43,14 +43,17 @@ jobs:
           path: ./OOXMLValidatorCLI/bin/Release/net8.0/${{ matrix.build_env }}/publish/OOXMLValidatorCLI
         
   publish-test-macos:
+    needs: publish
     runs-on: macos-latest
     steps:
       - run: ./dev.sh test osx-x64
   publish-test-linux:
+    needs: publish
     runs-on: ubuntu-latest
     steps:
       - run: ./dev.sh test linux-x64
   publish-test-windows:
+    needs: publish
     runs-on: windows-latest
     steps:
       - run: ./dev.sh test win-x64
