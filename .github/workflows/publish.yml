@@ -46,6 +46,7 @@ jobs:
     needs: publish
     runs-on: macos-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: build-osx-x64
@@ -55,6 +56,7 @@ jobs:
     needs: publish
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: build-linux-x64
@@ -64,6 +66,7 @@ jobs:
     needs: publish
     runs-on: windows-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: build-win-x64
