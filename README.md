@@ -52,8 +52,14 @@ To build where you replace `linux-x64` with your environment
 /dev.sh build linux-x64
 ```
 
-Run run it with
+Run the executable with
 
 ```bash
-/dev.sh run linux-x64
+/dev.sh run linux-x64 ./test.docx
+```
+
+If you don't want to install `dotnet` just run the following to start a container shell
+
+```
+/dev.sh docker
 ```
