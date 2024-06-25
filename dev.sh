@@ -79,7 +79,12 @@ run () {
         invalid_env "$build_env"
         exit 1
     fi
-    "./OOXMLValidatorCLI/bin/Release/net8.0/${build_env}/publish/OOXMLValidatorCLI" ${*:2}
+
+    if ! [[ "win-" =~ $build_env ]]; then
+        ext=".exe"
+    fi
+
+    "./OOXMLValidatorCLI/bin/Release/net8.0/${build_env}/publish/OOXMLValidatorCLI${ext}" ${*:2}
     exit 0
 }
 
@@ -95,7 +100,12 @@ test () {
         invalid_env "$build_env"
         exit 1
     fi
-    output="$("./OOXMLValidatorCLI/bin/Release/net8.0/${build_env}/publish/OOXMLValidatorCLI")" 
+
+    if ! [[ "win-" =~ $build_env ]]; then
+        ext=".exe"
+    fi
+
+    output="$("./OOXMLValidatorCLI/bin/Release/net8.0/${build_env}/publish/OOXMLValidatorCLI${ext}")" 
     if [[ "$output" == "Value cannot be null." ]]; then
         echo "success"
         exit 0
