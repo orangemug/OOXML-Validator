@@ -109,6 +109,7 @@ test () {
 
     shell_cmd="./${CI_SHELL_OVERRIDE:-"OOXMLValidatorCLI/bin/Release/net8.0/${build_env}/publish"}/OOXMLValidatorCLI${ext}"
     echo $shell_cmd
+    chmod +x "$($shell_cmd)"
     output="$($shell_cmd)" 
     if [[ "$output" == "Value cannot be null." ]]; then
         echo "success"
