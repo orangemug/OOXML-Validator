@@ -74,6 +74,6 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: build-win-x64
-          path: ./test-ci.exe
+          path: ./test-ci
       - shell: bash
         run: CI_SHELL_OVERRIDE=test-ci ./dev.sh test win-x64
