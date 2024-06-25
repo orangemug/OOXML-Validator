@@ -107,10 +107,7 @@ test () {
         ext=".exe"
     fi
 
-    shell_cmd="./OOXMLValidatorCLI/bin/Release/net8.0/${build_env}/publish/OOXMLValidatorCLI${ext}"
-    if [ "$CI_HACK" -eq 1 ]; then
-        shell_cmd="./test-ci${ext}"
-    fi
+    shell_cmd="./${CI_SHELL_OVERRIDE:-"OOXMLValidatorCLI/bin/Release/net8.0/${build_env}/publish"}/OOXMLValidatorCLI${ext}"
     echo $shell_cmd
     output="$($shell_cmd)" 
     if [[ "$output" == "Value cannot be null." ]]; then
