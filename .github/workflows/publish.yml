@@ -53,7 +53,6 @@ jobs:
         with:
           name: build-osx-x64
           path: ./test-ci
-      - run: ls -l test-ci
       - run: CI_SHELL_OVERRIDE=test-ci ./dev.sh test osx-x64
 
   publish-test-linux:
@@ -65,7 +64,6 @@ jobs:
         with:
           name: build-linux-x64
           path: ./test-ci
-      - run: ls -l test-ci
       - run: CI_SHELL_OVERRIDE=test-ci ./dev.sh test linux-x64
 
   publish-test-windows:
@@ -77,5 +75,5 @@ jobs:
         with:
           name: build-win-x64
           path: ./test-ci.exe
-      - run: ls -l test-ci
-      - run: CI_SHELL_OVERRIDE=test-ci ./dev.sh test win-x64
+      - shell: bash
+        run: CI_SHELL_OVERRIDE=test-ci ./dev.sh test win-x64
