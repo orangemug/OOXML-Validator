@@ -40,7 +40,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-${{ matrix.build_env }}
-          path: ./OOXMLValidatorCLI/bin/Release/net8.0/${{ matrix.build_env }}/publish/OOXMLValidatorCLI
+          path: |
+            ./OOXMLValidatorCLI/bin/Release/net8.0/${{ matrix.build_env }}/publish/OOXMLValidatorCLI
+            ./OOXMLValidatorCLI/bin/Release/net8.0/${{ matrix.build_env }}/publish/OOXMLValidatorCLI.exe
         
   publish-test-osx-x64:
     needs: publish
