@@ -75,3 +75,17 @@ jobs:
           path: ./test-ci
       - shell: bash
         run: CI_SHELL_OVERRIDE=test-ci ./dev.sh test win-x64
+
+  release:
+    name: Create Release
+    needs: [publish-test-osx-x64, publish-test-linux, publish-test-windows]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/create-release@v1
+        id: create_release
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: true
+          prerelease: false
