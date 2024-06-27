@@ -118,7 +118,7 @@ jobs:
           cd build-osx-arm64 && zip -r ../osx-arm64.zip * && cd -
           cd build-win-x64 && zip -r ../win-x64.zip * && cd -
       - run: ls -l
-      - run: npx github-release-notes release --tags=${{ github.ref_name }}
+      - run: npx github-release-notes changelog --tags=${{ github.ref_name }} -l 1
       - run: ls -l
       - run: cat CHANGELOG.md
       - name: release
