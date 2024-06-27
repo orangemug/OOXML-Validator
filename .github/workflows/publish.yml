@@ -94,19 +94,28 @@ jobs:
         with:
           name: build-linux-x64
           path: build-linux-x64
-      - run: cd build-linux-x64 && zip -r linux-x64.zip *
-      # - uses: actions/download-artifact@v4
-      #   with:
-      #     name: build-linux-arm64
-      # - uses: actions/download-artifact@v4
-      #   with:
-      #     name: build-osx-x64
-      # - uses: actions/download-artifact@v4
-      #   with:
-      #     name: build-osx-arm64
-      # - uses: actions/download-artifact@v4
-      #   with:
-      #     name: build-win-x64
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-linux-arm64
+          path: build-linux-arm64
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-osx-x64
+          path: build-osx-x64
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-osx-arm64
+          path: build-osx-arm64
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-win-x64
+          path: build-win-x64
+      - run: |
+        cd build-linux-x64 && zip -r ../linux-x64.zip * && cd -
+        cd build-linux-arm64 && zip -r ../linux-arm64.zip * && cd -
+        cd build-osx-x64 && zip -r ../osx-x64.zip * && cd -
+        cd build-osx-arm64 && zip -r ../osx-arm64.zip * && cd -
+        cd build-win-x64 && zip -r ../win-x64.zip * && cd -
       - run: ls -l
       # - uses: actions/upload-release-asset@v1
       #   id: upload-release-asset 
