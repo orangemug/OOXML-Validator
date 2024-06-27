@@ -78,10 +78,9 @@ jobs:
 
   release:
     name: Create Release
-    needs: [publish-test-osx-x64, publish-test-linux, publish-test-windows]
+    needs: [publish, publish-test-osx-x64, publish-test-linux, publish-test-windows]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - uses: actions/create-release@v1
         id: create_release
         env:
@@ -94,18 +93,20 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: build-linux-x64
-      - uses: actions/download-artifact@v4
-        with:
-          name: build-linux-arm64
-      - uses: actions/download-artifact@v4
-        with:
-          name: build-osx-x64
-      - uses: actions/download-artifact@v4
-        with:
-          name: build-osx-arm64
-      - uses: actions/download-artifact@v4
-        with:
-          name: build-win-x64
+          path: build-linux-x64
+      - run: cd build-linux-x64 && zip -r linux-x64.zip *
+      # - uses: actions/download-artifact@v4
+      #   with:
+      #     name: build-linux-arm64
+      # - uses: actions/download-artifact@v4
+      #   with:
+      #     name: build-osx-x64
+      # - uses: actions/download-artifact@v4
+      #   with:
+      #     name: build-osx-arm64
+      # - uses: actions/download-artifact@v4
+      #   with:
+      #     name: build-win-x64
       - run: ls -l
       # - uses: actions/upload-release-asset@v1
       #   id: upload-release-asset 
