@@ -91,12 +91,28 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: true
           prerelease: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-linux-x64
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-linux-arm64
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-osx-x64
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-osx-arm64
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-win-x64
+      - run: ls -l
       # - uses: actions/upload-release-asset@v1
       #   id: upload-release-asset 
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
       #     asset_path: ./my-artifact.zip
       #     asset_name: my-artifact.zip
       #     asset_content_type: application/zip
